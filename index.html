@@ -63,12 +63,71 @@
       margin-top: 0;
     }
 
+    .item button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #2c3e50;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .item button:hover {
+      background: #34495e;
+    }
+
+    .cart {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    .order-btn {
+      display: block;
+      margin: 2rem auto 3rem auto;
+      padding: 0.75rem 2rem;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .order-btn:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+
+    .order-btn:hover:enabled {
+      background: #2ecc71;
+    }
+
     footer {
       margin-top: 3rem;
       background: #2c3e50;
       color: white;
       text-align: center;
       padding: 1rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -89,26 +148,84 @@
     <section class="menu">
       <div class="item">
         <h3>Fresh Bread</h3>
-        <p>₽250 — Hot and crispy every morning.</p>
+        <p>֏250 — Hot and crispy every morning.</p>
+        <button onclick="addToCart('Fresh Bread', 250)">Add to Cart</button>
       </div>
       <div class="item">
         <h3>Organic Apples</h3>
-        <p>₽400 / kg — Sweet and fresh from the farm.</p>
+        <p>֏400 / kg — Sweet and fresh from the farm.</p>
+        <button onclick="addToCart('Organic Apples', 400)">Add to Cart</button>
       </div>
       <div class="item">
         <h3>Cheese</h3>
-        <p>₽700 — Locally made, creamy, and delicious.</p>
+        <p>֏700 — Locally made, creamy, and delicious.</p>
+        <button onclick="addToCart('Cheese', 700)">Add to Cart</button>
       </div>
       <div class="item">
         <h3>Coffee</h3>
-        <p>₽500 — Freshly ground premium beans.</p>
+        <p>֏500 — Freshly ground premium beans.</p>
+        <button onclick="addToCart('Coffee', 500)">Add to Cart</button>
       </div>
     </section>
+
+    <div class="cart">
+      <h2>🛒 Your Cart</h2>
+      <ul id="cart-list"></ul>
+      <p><strong>Total: ֏<span id="cart-total">0</span></strong></p>
+    </div>
+
+    <!-- Order button (disabled by default) -->
+    <button id="order-btn" class="order-btn" disabled onclick="location.href='order.html'">
+      Proceed to Order
+    </button>
   </main>
 
   <footer>
     <p>&copy; 2025 MsAz Market. All rights reserved.</p>
-    <p><a href="mailto:info@msaz-market.com" style="color:white;">info@msaz-market.com</a></p>
+    <p><a href="mailto:info@msaz-market.com">info@msaz-market.com</a></p>
   </footer>
+
+  <script>
+    const cart = [];
+    const cartList = document.getElementById('cart-list');
+    const cartTotal = document.getElementById('cart-total');
+    const orderBtn = document.getElementById('order-btn');
+
+    function addToCart(name, price) {
+      let qty = prompt(`How many ${name} do you want?`, 1);
+      qty = parseInt(qty);
+
+      if (isNaN(qty) || qty <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+      }
+
+      cart.push({ name, price, qty });
+      renderCart();
+    }
+
+    function renderCart() {
+      cartList.innerHTML = "";
+      let total = 0;
+
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.qty} × ${item.name} — ֏${item.price * item.qty}`;
+        cartList.appendChild(li);
+        total += item.price * item.qty;
+      });
+
+      cartTotal.textContent = total;
+
+      // Enable Order button only if cart has items
+      orderBtn.disabled = cart.length === 0;
+    }
+    // In renderCart() function (index.html)
+orderBtn.onclick = () => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  window.location.href = "order.html";
+};
+
+  </script>
 </body>
 </html>
