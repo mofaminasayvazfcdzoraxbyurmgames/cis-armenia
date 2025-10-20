@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="AM. Order — www.am-market-cis.netlify.app">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Order review page for AM Market at CIS Armenia.">
+  <title>AM Market — Confirm Order</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      color: #333;
+    }
 
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .cart-review {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .cart-review ul {
+      padding-left: 1.2rem;
+    }
+
+    .cart-review li {
+      margin-bottom: 0.5rem;
+    }
+
+    form {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 2rem;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2ecc71;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 3rem;
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AM Market</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="abt.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>🧾 Review Your Order</h2>
+
+    <div class="cart-review">
+      <ul id="review-list"></ul>
+      
+      <p><strong>Total: ֏<span id="review-total">0</span></strong></p>
+    </div>
+
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      
+      
+      <input type="hidden" name="order" id="order-input">
+
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="class">Your Class</label>
+      <input type="text" id="class" name="class" required>
+
+      <button type="submit">Submit Order</button>
+    </form>
+
+    <a href="index.html" class="back-link">← Go back to edit cart</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 AM Market, #Christmasbazaar. All rights reserved.</p>
+    <p><a href="mailto:minasayvaz.am@gmail.com">info@am-market.com</a></p>
+  </footer>
+
+  <script>
+    // Load cart from localStorage
+    const reviewList = document.getElementById('review-list');
+    const reviewTotal = document.getElementById('review-total');
+    const orderInput = document.getElementById('order-input');
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+      reviewList.innerHTML = "<li>Your cart is empty.</li>";
+    } else {
+      let total = 0;
+      let orderDetails = "";
+
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        const itemTotal = item.price * item.qty;
+        li.textContent = `${item.qty} × ${item.name} — ֏${itemTotal}`;
+        reviewList.appendChild(li);
+        total += itemTotal;
+        orderDetails += `${item.qty} × ${item.name} — ֏${itemTotal}\n`;
+      });
+      reviewTotal.textContent = total;
+      orderInput.value = orderDetails + `\nTotal: ֏${total}`;
+    }
+  </script>
+</body>
+</html>
