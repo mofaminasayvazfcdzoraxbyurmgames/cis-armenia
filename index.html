@@ -15,14 +15,10 @@
     }
 
     header {
-      background: #2c3e50;
+      background: white;
       color: white;
       padding: 1rem;
       text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
     }
 
     nav {
@@ -30,7 +26,7 @@
     }
 
     nav a {
-      color: white;
+      color: black;
       text-decoration: none;
       margin: 0 10px;
       font-weight: bold;
@@ -133,38 +129,39 @@
 </head>
 <body>
   <header>
-    <h1>MsAz Market</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="abt.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+      <br><br>
+    <img src="logo.pdf" width="309" height="201"><br>
   </header>
 
   <main>
-    <h1>Welcome to MsAz Market!</h1>
+    <h1>Welcome to KTAM!</h1>
     <p>Order your favorite products online easily.</p>
 
     <section class="menu">
       <div class="item">
         <h3>Gotcha's 'Blue Moon'</h3>
-        <p>֏3300 — Gotcha's 'Blue Moon' milk tea, with tapioca (500 ml).</p>
+        <p>֏3300 — Too BLUE to be true (With tapioca, 500 ml).</p>
         <button onclick="addToCart('Blue Moon, Gotcha', 3300)">Add to Cart</button>
       </div>
       <div class="item">
-        <h3>Cheese</h3>
+        <h3></h3>
         <p>֏700 — Locally made, creamy, and delicious.</p>
         <button onclick="addToCart('Cheese', 700)">Add to Cart</button>
       </div>
       <div class="item">
         <h3>Tiramisu</h3>
-        <p>֏1400  – Sweet. delicious. Unforgettable. (1 cup)</p>
+        <p>֏1400  – Cheap. delicious. Unforgettable. (1 cup)</p>
         <button onclick="addToCart('Tiramisu', 1400)">Add to Cart</button>
       </div>
       <div class="item">
-        <h3>Coffee</h3>
+        <h3>Cucumber Maki</h3>
         <p>֏500 — Freshly ground premium beans.</p>
         <button onclick="addToCart('Coffee', 500)">Add to Cart</button>
+      </div>
+      <div class="item">
+        <h3>Gotcha's 'Blue Moon'</h3>
+        <p>֏3300 — Too BLUE to be true (With tapioca, 500 ml).</p>
+        <button onclick="addToCart('Blue Moon, Gotcha', 3300)">Add to Cart</button>
       </div>
     </section>
 
@@ -174,15 +171,15 @@
       <p><strong>Total: ֏<span id="cart-total">0</span></strong></p>
     </div>
 
-    <!-- Order button (disabled by default) -->
+    
     <button id="order-btn" class="order-btn" disabled onclick="location.href='order.html'">
       Proceed to Order
     </button>
   </main>
 
   <footer>
-    <p>&copy; 2025 MsAz Market, #Christmasbazaar. All rights reserved.</p>
-    <p><a href="mailto:minasayvaz.am@gmail.com">info@msaz-market.com</a></p>
+    <p>&copy; 2025 KTAM, #Christmasbazaar. All rights reserved.</p>
+    <p><a href="mailto:robarm.info@gmail.com">robarm.info@gmail.com</a></p>
   </footer>
 
   <script>
